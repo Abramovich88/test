@@ -10,4 +10,4 @@ def test_mul():
     assert mul(2, 5) == 10
 
 def test_sumb():
-    assert sumb(6, 3) == 2
+    assert popsa(6, 3) == 2

@@ -7,5 +7,5 @@ def add(a: int, b: int):
 def mul(a: int, b: int):
     return a * b
 
-def sumb(a: int, b: int):
+def popsa(a: int, b: int):
     return a / b
