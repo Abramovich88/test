@@ -9,5 +9,5 @@ def test_add():
 def test_mul():
     assert mul(2, 5) == 10
 
-def test_summ():
-    assert summ(6, 3) == 2
+def test_sumb():
+    assert sumb(6, 3) == 2
