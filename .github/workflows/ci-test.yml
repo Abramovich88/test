@@ -35,7 +35,7 @@ jobs:
         run: docker build -t abramovapp:latest .
 
       - name: Save Docker image to tar
-        run: docker save mabramovapp:latest -o abramovapp.tar
+        run: docker save abramovapp:latest -o abramovapp.tar
 
       - name: Fix permissions
         run: sudo chmod 644 abramovapp.tar 
