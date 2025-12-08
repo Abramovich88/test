@@ -25,7 +25,7 @@ jobs:
         run: pytest
   deploy:
     needs: tests
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
