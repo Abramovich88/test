@@ -1,4 +1,4 @@
-from app import greet, add, mul, popsa
+from abramovapp import greet, add, mul, popsa
 
 def test_greet():
     assert greet("Stas") == "hi - Stas"
