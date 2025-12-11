@@ -23,14 +23,14 @@ jobs:
 
       - name: Run tests
         run: pytest
+
   deploy:
     needs: tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-      
+
       - name: Build Docker image
         run: docker build -t abramovapp:latest .
 
@@ -38,9 +38,18 @@ jobs:
         run: docker save abramovapp:latest -o abramovapp.tar
 
       - name: Fix permissions
-        run: sudo chmod 644 abramovapp.tar 
-      
-      
+        run: sudo chmod 644 abramovapp.tar
+
+      - name: Ensure target directory exists
+        uses: appleboy/ssh-action@v0.1.14
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: mkdir -p ~/Abramov
+
+
       - name: Copy image to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -49,10 +58,19 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "abramovapp.tar"
-          target: "~/Abramov"
+          target: "~/Abramov/"
+
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v0.1.14
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
           script: |
+            set -e
             cd ~/Abramov
-          
+
             echo "Loading Docker image..."
             docker load -i abramovapp.tar
 
