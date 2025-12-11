@@ -41,7 +41,7 @@ jobs:
         run: sudo chmod 644 abramovapp.tar
 
       - name: Ensure target directory exists
-        uses: appleboy/ssh-action@v0.1.14
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -61,7 +61,7 @@ jobs:
           target: "~/Abramov/"
 
       - name: Deploy on server
-        uses: appleboy/ssh-action@v0.1.14
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
